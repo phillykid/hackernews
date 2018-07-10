@@ -1,13 +1,16 @@
-import React, {Component} from 'react';
-import axios from 'axios'
+
+import React, { Component } from 'react';
+import axios from 'axios';
+import { sortBy } from 'lodash';
+import classNames from 'classnames';
+import Button  from '@material-ui/core/Button'
+
 import './App.css';
-import Button from '@material-ui/core/Button'
 
 import logo from './Anonymous_hacker_logo.png'
 import github from './github.svg'
 import email from './email.png'
 import linkedin from './linkedin.png'
-
 
 const DEFAULT_QUERY = 'redux';
 const DEFAULT_HPP = '100';
@@ -18,12 +21,19 @@ const PARAM_SEARCH = 'query=';
 const PARAM_PAGE = 'page=';
 const PARAM_HPP = 'hitsPerPage=';
 
-const url = `${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${DEFAULT_QUERY}`;
+const SORTS = {
+  NONE: list => list,
+  TITLE: list => sortBy(list, 'title'),
+  AUTHOR: list => sortBy(list, 'author'),
+  COMMENTS: list => sortBy(list, 'num_comments').reverse(),
+  POINTS: list => sortBy(list, 'points').reverse(),
+};
 
 
 
 class App extends Component {
   _isMounted = false;
+
   constructor(props) {
     super(props);
 
@@ -32,6 +42,9 @@ class App extends Component {
       searchKey: '',
       searchTerm: DEFAULT_QUERY,
       error: null,
+      isLoading: false,
+      sortKey: 'NONE',
+      isSortReverse: false,
     };
 
     this.needsToSearchTopStories = this.needsToSearchTopStories.bind(this);
@@ -40,6 +53,7 @@ class App extends Component {
     this.onSearchChange = this.onSearchChange.bind(this);
     this.onSearchSubmit = this.onSearchSubmit.bind(this);
     this.onDismiss = this.onDismiss.bind(this);
+    this.onSort = this.onSort.bind(this);
   }
 
   needsToSearchTopStories(searchTerm) {
@@ -63,18 +77,22 @@ class App extends Component {
       results: {
         ...results,
         [searchKey]: { hits: updatedHits, page }
-      }
+      },
+      isLoading: false
     });
   }
 
   fetchSearchTopStories(searchTerm, page = 0) {
+    this.setState({ isLoading: true });
+
     axios(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}&${PARAM_PAGE}${page}&${PARAM_HPP}${DEFAULT_HPP}`)
-    .then(result => this._isMounted && this.setSearchTopStories(result.data))
-    .catch(error => this._isMounted && this.setState({ error }));
+      .then(result => this.setSearchTopStories(result.data))
+      .catch(error => this._isMounted && this.setState({ error }));
   }
 
   componentDidMount() {
     this._isMounted = true;
+
     const { searchTerm } = this.state;
     this.setState({ searchKey: searchTerm });
     this.fetchSearchTopStories(searchTerm);
@@ -82,7 +100,7 @@ class App extends Component {
 
   componentWillUnmount() {
     this._isMounted = false;
-    }
+  }
 
   onSearchChange(event) {
     this.setState({ searchTerm: event.target.value });
@@ -114,12 +132,20 @@ class App extends Component {
     });
   }
 
+  onSort(sortKey) {
+    const isSortReverse = this.state.sortKey === sortKey && !this.state.isSortReverse;
+    this.setState({ sortKey, isSortReverse });
+  }
+
   render() {
     const {
       searchTerm,
       results,
       searchKey,
-      error
+      error,
+      isLoading,
+      sortKey,
+      isSortReverse
     } = this.state;
 
     const page = (
@@ -136,18 +162,20 @@ class App extends Component {
 
     return (
       <div className="page">
-          <div className="social-header">
-          <a href="https://github.com/phillykid"> <img className="social-icon" src={github}/></a>
-          <a href="https://www.linkedin.com/in/phillycoder/"> <img className="social-icon" src={linkedin}/></a>
-          <a href="mailto:lopezl@lafayette.edu"> <img className="social-icon" src={email}/></a>
+       <div className="social-header">
+                    <a href="https://github.com/phillykid">
+                        <img className="social-icon" src={github}/></a>
+                    <a href="https://www.linkedin.com/in/phillycoder/">
+                        <img className="social-icon" src={linkedin}/></a>
+                    <a href="mailto:lopezl@lafayette.edu">
+                        <img className="social-icon" src={email}/></a>
 
-
-
-          </div>
-        <div className="App">
-        <h1 id="logo-text"> Hackernews Clone Example</h1> 
-        <img className="App-logo" src={logo} />
-        </div>
+                </div>
+                <div className="App">
+                    <h1 id="logo-text">
+                        Hackernews Clone Example</h1>
+                    <img className="App-logo" src={logo}/>
+                </div>
         <div className="interactions">
           <Search
             value={searchTerm}
@@ -163,14 +191,18 @@ class App extends Component {
           </div>
           : <Table
             list={list}
+            sortKey={sortKey}
+            isSortReverse={isSortReverse}
+            onSort={this.onSort}
             onDismiss={this.onDismiss}
           />
         }
         <div className="interactions">
-          <ButtonMat onClick={() => this.fetchSearchTopStories(searchKey, page + 1)}>
-          
+          <ButtonWithLoading
+            isLoading={isLoading}
+            onClick={() => this.fetchSearchTopStories(searchKey, page + 1)}>
             More
-          </ButtonMat>
+          </ButtonWithLoading>
         </div>
       </div>
     );
@@ -189,72 +221,139 @@ const Search = ({
       value={value}
       onChange={onChange}
     />
-    <ButtonMat type="submit">
+    <Button type="submit">
       {children}
-    </ButtonMat>
+    </Button>
   </form>
 
-const Table = ({ list, onDismiss }) =>
-  <div className="table">
-<div className="table-row-header">
-        <span style={{ width: '39.5%' }}>
-          Title
-        </span>
-        <span style={{ width: '29.5%' }}>
-        Author
-        </span>
-        <span style={{ width: '10%' }}>
-        #Comments
-        </span>
-        <span style={{ width: '10%' }}>
-          Points
-        </span>
-        <span style={{ width: '10%' }}>
-        </span>
-        </div>
-    {list.map(item =>
-      <div key={item.objectID} className="table-row">
+const Table = ({
+  list,
+  sortKey,
+  isSortReverse,
+  onSort,
+  onDismiss
+}) => {
+  const sortedList = SORTS[sortKey](list);
+  const reverseSortedList = isSortReverse
+    ? sortedList.reverse()
+    : sortedList;
+
+  return(
+    <div className="table">
+      <div className="table-header">
         <span style={{ width: '40%' }}>
-          <a href={item.url}>{item.title}</a>
+          <Sort
+            sortKey={'TITLE'}
+            onSort={onSort}
+            activeSortKey={sortKey}
+          >
+            Title
+          </Sort>
         </span>
         <span style={{ width: '30%' }}>
-          {item.author}
-        </span>
-        <span style={{ width: '10%' }}>
-          {item.num_comments}
-        </span>
-        <span style={{ width: '10%' }}>
-          {item.points}
-        </span>
-        <span style={{ width: '10%' }}>
-          <Button
-            onClick={() => onDismiss(item.objectID)}
-            className="button-inline"
+          <Sort
+            sortKey={'AUTHOR'}
+            onSort={onSort}
+            activeSortKey={sortKey}
           >
-            Dismiss
-          </Button>
+            Author
+          </Sort>
+        </span>
+        <span style={{ width: '10%' }}>
+          <Sort
+            sortKey={'COMMENTS'}
+            onSort={onSort}
+            activeSortKey={sortKey}
+          >
+            Comments
+          </Sort>
+        </span>
+        <span style={{ width: '10%' }}>
+          <Sort
+            sortKey={'POINTS'}
+            onSort={onSort}
+            activeSortKey={sortKey}
+          >
+            Points
+          </Sort>
+        </span>
+        <span style={{ width: '10%' }}>
+          Archive
         </span>
       </div>
-    )}
-  </div>
+      {reverseSortedList.map(item =>
+        <div key={item.objectID} className="table-row">
+          <span style={{ width: '40%' }}>
+            <a href={item.url}>{item.title}</a>
+          </span>
+          <span style={{ width: '30%' }}>
+            {item.author}
+          </span>
+          <span style={{ width: '10%' }}>
+            {item.num_comments}
+          </span>
+          <span style={{ width: '10%' }}>
+            {item.points}
+          </span>
+          <span style={{ width: '10%' }}>
+            <Button
+              onClick={() => onDismiss(item.objectID)}
+              className="button-inline"
+            >
+              Dismiss
+            </Button>
+          </span>
+        </div>
+      )}
+    </div>
+  );
+}
 
-const ButtonMat = ({
-  onClick,
-  className = '',
-  children,
-}) =>
-  <Button
-    onClick={onClick}
-    className={className}
-    type="button"
-  >
-    {children}
-  </Button>
+const Sort = ({
+  sortKey,
+  activeSortKey,
+  onSort,
+  children
+}) => {
+  const sortClass = classNames(
+    'button-inline',
+    { 'button-active': sortKey === activeSortKey }
+  );
 
-export default App;
+  return (
+    <Button
+      onClick={() => onSort(sortKey)}
+      className={sortClass}
+    >
+      {children}
+    </Button>
+  );
+}
+
+
+
+//from https://loading.io/css/
+const Loading = () => <div className="lds-roller">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+</div>
+
+const withLoading = (Component) => ({ isLoading, ...rest }) =>
+  isLoading
+    ? <Loading />
+    : <Component { ...rest } />
+
+const ButtonWithLoading = withLoading(Button);
 
 export {
-  Button,
   Search,
   Table,
-  };
+};
+
+export default App;

@@ -139,7 +139,7 @@ class App extends Component {
           <div className="social-header">
           <a href="https://github.com/phillykid"> <img className="social-icon" src={github}/></a>
           <a href="https://www.linkedin.com/in/phillycoder/"> <img className="social-icon" src={linkedin}/></a>
-          <a href="@lopezl@lafayette.edu"> <img className="social-icon" src={email}/></a>
+          <a href="mailto:lopezl@lafayette.edu"> <img className="social-icon" src={email}/></a>
 
 
 

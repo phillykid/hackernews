@@ -1,0 +1,448 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App has a valid snapshot 1`] = `
+<div
+  className="page"
+>
+  <div
+    className="social-header"
+  >
+    <a
+      href="https://github.com/phillykid"
+    >
+       
+      <img
+        className="social-icon"
+        src="github.svg"
+      />
+    </a>
+    <a
+      href="https://www.linkedin.com/in/phillycoder/"
+    >
+       
+      <img
+        className="social-icon"
+        src="linkedin.png"
+      />
+    </a>
+    <a
+      href="mailto:lopezl@lafayette.edu"
+    >
+       
+      <img
+        className="social-icon"
+        src="email.png"
+      />
+    </a>
+  </div>
+  <div
+    className="App"
+  >
+    <h1
+      id="logo-text"
+    >
+       Hackernews Clone Example
+    </h1>
+    <img
+      className="App-logo"
+      src="Anonymous_hacker_logo.png"
+    />
+  </div>
+  <div
+    className="interactions"
+  >
+    <form
+      onSubmit={[Function]}
+    >
+      <input
+        onChange={[Function]}
+        type="text"
+        value="redux"
+      />
+      <button
+        className="MuiButtonBase-root-59 MuiButton-root-35 MuiButton-text-37 MuiButton-flat-40"
+        disabled={false}
+        onBlur={[Function]}
+        onClick={undefined}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        tabIndex="0"
+        type="button"
+      >
+        <span
+          className="MuiButton-label-36"
+        >
+          Search
+        </span>
+        <span
+          className="MuiTouchRipple-root-62"
+        />
+      </button>
+    </form>
+  </div>
+  <div
+    className="table"
+  >
+    <div
+      className="table-row-header"
+    >
+      <span
+        style={
+          Object {
+            "width": "39.5%",
+          }
+        }
+      >
+        Title
+      </span>
+      <span
+        style={
+          Object {
+            "width": "29.5%",
+          }
+        }
+      >
+        Author
+      </span>
+      <span
+        style={
+          Object {
+            "width": "10%",
+          }
+        }
+      >
+        #Comments
+      </span>
+      <span
+        style={
+          Object {
+            "width": "10%",
+          }
+        }
+      >
+        Points
+      </span>
+      <span
+        style={
+          Object {
+            "width": "10%",
+          }
+        }
+      />
+    </div>
+  </div>
+  <div
+    className="interactions"
+  >
+    <button
+      className="MuiButtonBase-root-59 MuiButton-root-35 MuiButton-text-37 MuiButton-flat-40"
+      disabled={false}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      tabIndex="0"
+      type="button"
+    >
+      <span
+        className="MuiButton-label-36"
+      >
+        More
+      </span>
+      <span
+        className="MuiTouchRipple-root-62"
+      />
+    </button>
+  </div>
+</div>
+`;
+
+exports[`Button has a valid snapshot 1`] = `
+<button
+  className="MuiButtonBase-root-59 MuiButton-root-35 MuiButton-text-37 MuiButton-flat-40"
+  disabled={false}
+  onBlur={[Function]}
+  onFocus={[Function]}
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  onMouseDown={[Function]}
+  onMouseLeave={[Function]}
+  onMouseUp={[Function]}
+  onTouchEnd={[Function]}
+  onTouchMove={[Function]}
+  onTouchStart={[Function]}
+  tabIndex="0"
+  type="button"
+>
+  <span
+    className="MuiButton-label-36"
+  >
+    Give Me More
+  </span>
+  <span
+    className="MuiTouchRipple-root-62"
+  />
+</button>
+`;
+
+exports[`Search has a valid snapshot 1`] = `
+<form
+  onSubmit={undefined}
+>
+  <input
+    onChange={undefined}
+    type="text"
+    value={undefined}
+  />
+  <button
+    className="MuiButtonBase-root-59 MuiButton-root-35 MuiButton-text-37 MuiButton-flat-40"
+    disabled={false}
+    onBlur={[Function]}
+    onClick={undefined}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseDown={[Function]}
+    onMouseLeave={[Function]}
+    onMouseUp={[Function]}
+    onTouchEnd={[Function]}
+    onTouchMove={[Function]}
+    onTouchStart={[Function]}
+    tabIndex="0"
+    type="button"
+  >
+    <span
+      className="MuiButton-label-36"
+    >
+      Search
+    </span>
+    <span
+      className="MuiTouchRipple-root-62"
+    />
+  </button>
+</form>
+`;
+
+exports[`Table has a valid snapshot 1`] = `
+<div
+  className="table"
+>
+  <div
+    className="table-row-header"
+  >
+    <span
+      style={
+        Object {
+          "width": "39.5%",
+        }
+      }
+    >
+      Title
+    </span>
+    <span
+      style={
+        Object {
+          "width": "29.5%",
+        }
+      }
+    >
+      Author
+    </span>
+    <span
+      style={
+        Object {
+          "width": "10%",
+        }
+      }
+    >
+      #Comments
+    </span>
+    <span
+      style={
+        Object {
+          "width": "10%",
+        }
+      }
+    >
+      Points
+    </span>
+    <span
+      style={
+        Object {
+          "width": "10%",
+        }
+      }
+    />
+  </div>
+  <div
+    className="table-row"
+  >
+    <span
+      style={
+        Object {
+          "width": "40%",
+        }
+      }
+    >
+      <a
+        href={undefined}
+      >
+        1
+      </a>
+    </span>
+    <span
+      style={
+        Object {
+          "width": "30%",
+        }
+      }
+    >
+      1
+    </span>
+    <span
+      style={
+        Object {
+          "width": "10%",
+        }
+      }
+    >
+      1
+    </span>
+    <span
+      style={
+        Object {
+          "width": "10%",
+        }
+      }
+    >
+      2
+    </span>
+    <span
+      style={
+        Object {
+          "width": "10%",
+        }
+      }
+    >
+      <button
+        className="MuiButtonBase-root-59 MuiButton-root-35 MuiButton-text-37 MuiButton-flat-40 button-inline"
+        disabled={false}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        tabIndex="0"
+        type="button"
+      >
+        <span
+          className="MuiButton-label-36"
+        >
+          Dismiss
+        </span>
+        <span
+          className="MuiTouchRipple-root-62"
+        />
+      </button>
+    </span>
+  </div>
+  <div
+    className="table-row"
+  >
+    <span
+      style={
+        Object {
+          "width": "40%",
+        }
+      }
+    >
+      <a
+        href={undefined}
+      >
+        2
+      </a>
+    </span>
+    <span
+      style={
+        Object {
+          "width": "30%",
+        }
+      }
+    >
+      2
+    </span>
+    <span
+      style={
+        Object {
+          "width": "10%",
+        }
+      }
+    >
+      1
+    </span>
+    <span
+      style={
+        Object {
+          "width": "10%",
+        }
+      }
+    >
+      2
+    </span>
+    <span
+      style={
+        Object {
+          "width": "10%",
+        }
+      }
+    >
+      <button
+        className="MuiButtonBase-root-59 MuiButton-root-35 MuiButton-text-37 MuiButton-flat-40 button-inline"
+        disabled={false}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        tabIndex="0"
+        type="button"
+      >
+        <span
+          className="MuiButton-label-36"
+        >
+          Dismiss
+        </span>
+        <span
+          className="MuiTouchRipple-root-62"
+        />
+      </button>
+    </span>
+  </div>
+</div>
+`;

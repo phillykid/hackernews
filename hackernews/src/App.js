@@ -252,3 +252,9 @@ const ButtonMat = ({
   </Button>
 
 export default App;
+
+export {
+  Button,
+  Search,
+  Table,
+  };

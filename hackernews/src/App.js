@@ -3,14 +3,17 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { sortBy } from 'lodash';
 import classNames from 'classnames';
+import Grid from '@material-ui/core/Grid';
+import { withStyles } from '@material-ui/core/styles';
+
 import Button  from '@material-ui/core/Button'
 
 import './App.css';
 
-import logo from './Anonymous_hacker_logo.png'
-import github from './github.svg'
-import email from './email.png'
-import linkedin from './linkedin.png'
+import logo from './assets/images/Anonymous_hacker_logo.png'
+import github from './assets/images/github.svg'
+import email from './assets/images/email.png'
+import linkedin from './assets/images/linkedin.png'
 
 const DEFAULT_QUERY = 'redux';
 const DEFAULT_HPP = '100';
@@ -20,6 +23,19 @@ const PATH_SEARCH = '/search';
 const PARAM_SEARCH = 'query=';
 const PARAM_PAGE = 'page=';
 const PARAM_HPP = 'hitsPerPage=';
+
+const styles = theme => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    height: 140,
+    width: 100,
+  },
+  control: {
+    padding: theme.spacing.unit * 2,
+  },
+});
 
 const SORTS = {
   NONE: list => list,
@@ -161,6 +177,7 @@ class App extends Component {
     ) || [];
 
     return (
+      <div className="container">
       <div className="page">
        <div className="social-header">
                     <a href="https://github.com/phillykid">
@@ -171,11 +188,20 @@ class App extends Component {
                         <img className="social-icon" src={email}/></a>
 
                 </div>
-                <div className="App">
+                <div className="Header">
                     <h1 id="logo-text">
                         Hackernews Clone Example</h1>
+                        <div className="App">
                     <img className="App-logo" src={logo}/>
+                    </div>
                 </div>
+
+                      </div>
+
+                          <div className="container">
+                          <div className="page">
+
+   
         <div className="interactions">
           <Search
             value={searchTerm}
@@ -205,6 +231,10 @@ class App extends Component {
           </ButtonWithLoading>
         </div>
       </div>
+      </div>
+      </div>
+
+
     );
   }
 }
@@ -241,7 +271,7 @@ const Table = ({
   return(
     <div className="table">
       <div className="table-header">
-        <span style={{ width: '40%' }}>
+        <span style={{ width: '30%' }}>
           <Sort
             sortKey={'TITLE'}
             onSort={onSort}
@@ -250,7 +280,7 @@ const Table = ({
             Title
           </Sort>
         </span>
-        <span style={{ width: '30%' }}>
+        <span style={{ width: '25%' }}>
           <Sort
             sortKey={'AUTHOR'}
             onSort={onSort}
@@ -259,7 +289,7 @@ const Table = ({
             Author
           </Sort>
         </span>
-        <span style={{ width: '10%' }}>
+        <span style={{ width: '13%' }}>
           <Sort
             sortKey={'COMMENTS'}
             onSort={onSort}
@@ -278,15 +308,16 @@ const Table = ({
           </Sort>
         </span>
         <span style={{ width: '10%' }}>
-          Archive
-        </span>
+
+                  </span>
+      
       </div>
       {reverseSortedList.map(item =>
         <div key={item.objectID} className="table-row">
           <span style={{ width: '40%' }}>
             <a href={item.url}>{item.title}</a>
           </span>
-          <span style={{ width: '30%' }}>
+          <span style={{ width: '35%' }}>
             {item.author}
           </span>
           <span style={{ width: '10%' }}>
@@ -295,7 +326,7 @@ const Table = ({
           <span style={{ width: '10%' }}>
             {item.points}
           </span>
-          <span style={{ width: '10%' }}>
+          <span style={{ width: '12%' }}>
             <Button
               onClick={() => onDismiss(item.objectID)}
               className="button-inline"

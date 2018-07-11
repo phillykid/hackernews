@@ -1,12 +1,43 @@
 .App {
   text-align: center;
+
 }
+
+.Header {
+  text-align: center;
+
+}
+
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
-  height: 560px;
+  height: 10vw;
+
 }
 
+@media (max-width: 768px) {
+  .App-logo {
+    height: 240px;  }
+}
+@media (min-width: 768px) {
+  .App-logo {
+    height: 240px;  }
+}
+@media (min-width: 992px) {
+  .App-logo {
+    height: 400px;
+  }
+}
+@media (min-width: 1200px) {
+  .App-logo {
+    height: 560px;
+  }
+}
+
+
+.social-header {
+  top: 20em;
+}
 
 .social-icon {
   height: 40px;
@@ -58,12 +89,12 @@
 
   .table {
   margin: 20px 0;
+  width: 90vw;
   }
   .table-header {
   display: flex;
   line-height: 24px;
   font-size: 16px;
-  padding: 0 10px;
   justify-content: space-between;
   }
   .table-empty {
@@ -100,6 +131,36 @@
     text-overflow: ellipsis;
     padding: 0 5px;
     }
+
+    /* @media (min-width: 250px) {
+      .table {
+        width: 200px;  }
+    }
+    
+    @media (min-width: 500px) {
+      .table {
+        width: 450px;  }
+    }
+
+    @media (min-width: 630px) {
+      .table {
+        width: 580px;  }
+    }
+    @media (min-width: 768px) {
+      .table {
+        width: 718px;  }
+    }
+    @media (min-width: 992px) {
+      .table {
+        width: 942px;
+      }
+    }
+    @media (min-width: 1200px) {
+      .table {
+        width: 1150px;
+      }
+    } */
+
     .button-inline {
     border-width: 0;
     background: transparent;
@@ -122,12 +183,13 @@
   color: #555;
   text-decoration: none;
   text-transform: uppercase;
-  font-size: 150px;
+  font-size: 8vw;
   font-weight: 800;
   letter-spacing: -3px;
   line-height: 1;
   text-shadow: #EDEDED 3px 2px 0;
   position: relative;
+  margin-bottom: 30px;
 }
 #logo-text:after {
   content:"Hackernews clone example";
@@ -145,6 +207,32 @@
   display: block;
   text-shadow: none;
 }
+
+/* @media (min-width: 250px) {
+  #logo-text {
+    font-size: 15px;  }
+}
+
+@media (min-width: 500px) {
+  #logo-text {
+    font-size: 25px;  }
+}
+@media (min-width: 768px) {
+  #logo-text {
+    font-size: 25px;  }
+}
+@media (min-width: 992px) {
+  #logo-text {
+    font-size: 75px;
+  }
+}
+@media (min-width: 1200px) {
+  #logo-text {
+    font-size: 150px;
+  }
+} */
+
+
 
 .lds-roller {
   display: inline-block;
@@ -232,4 +320,24 @@
 }
 
 
-
+.container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}

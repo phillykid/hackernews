@@ -241,7 +241,7 @@ const Search = ({
       onChange={onChange}
     />
     <Button type="submit"
-    labelStyle={{ fontSize: '2vw' }}>
+    style={{ fontSize: '2vw' }}>
       {children}
     </Button>
   </form>
@@ -298,27 +298,27 @@ const Table = ({
           </Sort>
         </span>
         <span style={{ width: '10%' }}>
-
+          
                   </span>
       
       </div>
       {reverseSortedList.map(item =>
         <div key={item.objectID} className="table-row">
-          <span style={{ width: '40%' }}>
+          <span style={{ width: '30%' }}>
             <a href={item.url}>{item.title}</a>
           </span>
-          <span style={{ width: '35%' }}>
+          <span style={{ width: '25%' }}>
             {item.author}
           </span>
-          <span style={{ width: '10%' }}>
+          <span style={{ width: '13%' }}>
             {item.num_comments}
           </span>
           <span style={{ width: '10%' }}>
             {item.points}
           </span>
-          <span style={{ width: '12%' }}>
+          <span style={{ width: '10%' }}>
             <Button
-            labelStyle={{ fontSize: '2vw' }}
+            style={{ fontSize: '1.5vw'}}
               onClick={() => onDismiss(item.objectID)}
               className="button-inline"
             >
@@ -344,7 +344,7 @@ const Sort = ({
 
   return (
     <Button
-    labelStyle={{ fontSize: '2vw' }}
+    style={{ fontSize: '1vw' }}
       onClick={() => onSort(sortKey)}
       className={sortClass}
     >

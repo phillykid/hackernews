@@ -4,6 +4,7 @@
 }
 
 .Header {
+  flex:1;
   text-align: center;
 
 }
@@ -11,32 +12,16 @@
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
-  height: 10vw;
+  height: 30vw;
 
 }
 
-@media (max-width: 768px) {
-  .App-logo {
-    height: 240px;  }
-}
-@media (min-width: 768px) {
-  .App-logo {
-    height: 240px;  }
-}
-@media (min-width: 992px) {
-  .App-logo {
-    height: 400px;
-  }
-}
-@media (min-width: 1200px) {
-  .App-logo {
-    height: 560px;
-  }
-}
+
 
 
 .social-header {
   top: 20em;
+  flex:1;
 }
 
 .social-icon {
@@ -76,6 +61,8 @@
 
 .page {
   margin: 20px;
+  flex: 1;
+  align-content: center;
   }
   .interactions {
   text-align: center;
@@ -86,17 +73,18 @@
   
     background: #3a3737;
     border: 1px solid #e3e3e3;
-    font-size: 2vw;
+    text-align: center;
     }
 
   .table {
   margin: 20px 0;
   width: 90vw;
+  font-size: 2vw;
   }
   .table-header {
   display: flex;
   line-height: 24px;
-  font-size: 2vw;
+
   justify-content: space-between;
   }
   .table-empty {
@@ -114,31 +102,27 @@
     border: 1px solid #e3e3e3;
     }
 
-    .table-row-header {
-      display: flex;
-      line-height: 24px;
-      white-space: nowrap;
-      margin: 10px 0;
-      padding: 10px;
-      background: #0a030342;
-      border: 1px solid #e3e3e300;
-      }
+    
     .table-header > span {
     overflow: hidden;
+    text-align: left;
     text-overflow: ellipsis;
-    padding: 0 5px;
+    padding: 0 6vw;
     }
     .table-row > span {
+    display: flex;
     overflow: hidden;
     text-overflow: ellipsis;
-    padding: 0 0px;
-    font-size: 2.5vw;
+    text-align: left;
+
+    padding: 0 6vw;
+    font-size: 1vw;
 
     }
 
     @media (min-width: 700px) {
       .table-row > span {
-        font-size: 2vw;  }
+        font-size: 1.5vw;  }
     }
 
     @media (min-width: 1000px) {
@@ -194,11 +178,12 @@
     border-width: 0;
     background: transparent;
     color: inherit;
-    text-align: inherit;
+    text-align: center;
     -webkit-font-smoothing: inherit;
     padding: 0;
     font-size: inherit;
     cursor: pointer;
+
     }
     .button-active {
     border-radius: 0;
@@ -354,6 +339,7 @@
     flex-direction: column;
     align-items: flex-start;
     align-content: center;
+    margin: 20px;
  
 }
 

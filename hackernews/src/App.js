@@ -24,18 +24,7 @@ const PARAM_SEARCH = 'query=';
 const PARAM_PAGE = 'page=';
 const PARAM_HPP = 'hitsPerPage=';
 
-const styles = theme => ({
-  root: {
-    flexGrow: 1,
-  },
-  paper: {
-    height: 140,
-    width: 100,
-  },
-  control: {
-    padding: theme.spacing.unit * 2,
-  },
-});
+
 
 const SORTS = {
   NONE: list => list,
@@ -251,7 +240,8 @@ const Search = ({
       value={value}
       onChange={onChange}
     />
-    <Button type="submit">
+    <Button type="submit"
+    labelStyle={{ fontSize: '2vw' }}>
       {children}
     </Button>
   </form>
@@ -328,6 +318,7 @@ const Table = ({
           </span>
           <span style={{ width: '12%' }}>
             <Button
+            labelStyle={{ fontSize: '2vw' }}
               onClick={() => onDismiss(item.objectID)}
               className="button-inline"
             >
@@ -353,6 +344,7 @@ const Sort = ({
 
   return (
     <Button
+    labelStyle={{ fontSize: '2vw' }}
       onClick={() => onSort(sortKey)}
       className={sortClass}
     >

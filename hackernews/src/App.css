@@ -80,11 +80,13 @@
   .interactions {
   text-align: center;
   padding-top: 30px;
+  
   }
   .Button{
   
     background: #3a3737;
     border: 1px solid #e3e3e3;
+    font-size: 2vw;
     }
 
   .table {
@@ -94,13 +96,13 @@
   .table-header {
   display: flex;
   line-height: 24px;
-  font-size: 16px;
+  font-size: 2vw;
   justify-content: space-between;
   }
   .table-empty {
   margin: 200px;
   text-align: center;
-  font-size: 16px;
+  font-size: 2vw;
   }
   .table-row {
     display: flex;
@@ -129,7 +131,34 @@
     .table-row > span {
     overflow: hidden;
     text-overflow: ellipsis;
-    padding: 0 5px;
+    padding: 0 0px;
+    font-size: 2.5vw;
+
+    }
+
+    @media (min-width: 700px) {
+      .table-row > span {
+        font-size: 2vw;  }
+    }
+
+    @media (min-width: 1000px) {
+      .table-row > span {
+        font-size: 1.8vw;  }
+    }
+
+    @media (min-width: 1200px) {
+      .table-row > span {
+        font-size: 1.6vw;  }
+    }
+
+    @media (min-width: 1400px) {
+      .table-row > span {
+        font-size: 1.4vw;  }
+    }
+
+    @media (min-width: 1600px) {
+      .table-row > span {
+        font-size: 1.2vw;  }
     }
 
     /* @media (min-width: 250px) {
@@ -321,23 +350,10 @@
 
 
 .container {
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: auto;
-  margin-left: auto;
+  display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-content: center;
+ 
 }
-@media (min-width: 768px) {
-  .container {
-    width: 750px;
-  }
-}
-@media (min-width: 992px) {
-  .container {
-    width: 970px;
-  }
-}
-@media (min-width: 1200px) {
-  .container {
-    width: 1170px;
-  }
-}
+

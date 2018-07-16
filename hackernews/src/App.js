@@ -3,8 +3,9 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { sortBy } from 'lodash';
 import classNames from 'classnames';
-import Grid from '@material-ui/core/Grid';
-import { withStyles } from '@material-ui/core/styles';
+import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table'
+import ReactTable from "react-table";
+import "react-table/react-table.css";import Grid from '@material-ui/core/Grid';
 
 import Button  from '@material-ui/core/Button'
 
@@ -23,6 +24,9 @@ const PATH_SEARCH = '/search';
 const PARAM_SEARCH = 'query=';
 const PARAM_PAGE = 'page=';
 const PARAM_HPP = 'hitsPerPage=';
+
+let total_pages=0;
+let total_hits=0;
 
 
 
@@ -66,7 +70,7 @@ class App extends Component {
   }
 
   setSearchTopStories(result) {
-    const { hits, page } = result;
+    const { hits, page, nbHits } = result;
     const { searchKey, results } = this.state;
 
     const oldHits = results && results[searchKey]
@@ -85,6 +89,14 @@ class App extends Component {
       },
       isLoading: false
     });
+    console.log(result);  
+    console.log(page);  
+    console.log(nbHits);  
+    total_hits=nbHits;
+    console.log(total_hits/10)
+
+
+
   }
 
   fetchSearchTopStories(searchTerm, page = 0) {
@@ -93,7 +105,7 @@ class App extends Component {
     axios(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}&${PARAM_PAGE}${page}&${PARAM_HPP}${DEFAULT_HPP}`)
       .then(result => this.setSearchTopStories(result.data))
       .catch(error => this._isMounted && this.setState({ error }));
-  }
+    }
 
   componentDidMount() {
     this._isMounted = true;
@@ -185,13 +197,10 @@ class App extends Component {
                     </div>
                 </div>
 
-                      </div>
+                      
 
-                          <div className="container">
-                          <div className="page">
-
-   
-        <div className="interactions">
+                          
+        <div className="search">
           <Search
             value={searchTerm}
             onChange={this.onSearchChange}
@@ -200,18 +209,49 @@ class App extends Component {
             Search
           </Search>
         </div>
+        <div className="interactions">
         { error
           ? <div className="interactions">
             <p>Something went wrong.</p>
           </div>
-          : <Table
-            list={list}
-            sortKey={sortKey}
-            isSortReverse={isSortReverse}
-            onSort={this.onSort}
-            onDismiss={this.onDismiss}
-          />
+          : <ReactTable
+          data={list}
+          columns={[
+            {
+              Header: "Articles",
+              columns: [
+                {
+                  Header: "Title",
+                  accessor: "title",
+                  minWidth: 400,
+                  link: "url"
+                },
+                {
+                  Header: "Author",
+                  accessor: "author"
+                },
+                {
+                  Header: "#Comments",
+                  accessor: "num_comments"
+                },
+                {
+                  Header: "Points",
+                  accessor: "points",
+                 
+                }
+              ]
+            }
+          ]}
+          manual // Forces table not to paginate or sort automatically, so we can handle it server-side
+          data={list}
+          pages={Math.ceil(total_hits/10)} // Display the total number of pages
+          loading={isLoading} // Display the loading overlay when we need it
+          filterable
+          defaultPageSize={10}
+          className="-striped -highlight"
+        />
         }
+        </div>
         <div className="interactions">
           <ButtonWithLoading
             isLoading={isLoading}
@@ -219,7 +259,6 @@ class App extends Component {
             More
           </ButtonWithLoading>
         </div>
-      </div>
       </div>
       </div>
 
@@ -240,13 +279,15 @@ const Search = ({
       value={value}
       onChange={onChange}
     />
+    <div className="search-button">
     <Button type="submit"
     style={{ fontSize: '2vw' }}>
       {children}
     </Button>
+    </div>
   </form>
 
-const Table = ({
+const TableSorted = ({
   list,
   sortKey,
   isSortReverse,
@@ -259,9 +300,10 @@ const Table = ({
     : sortedList;
 
   return(
-    <div className="table">
-      <div className="table-header">
-        <span style={{ width: '30%' }}>
+    <Table>
+      <Thead>
+        <Tr>
+        <Td>
           <Sort
             sortKey={'TITLE'}
             onSort={onSort}
@@ -269,8 +311,8 @@ const Table = ({
           >
             Title
           </Sort>
-        </span>
-        <span style={{ width: '25%' }}>
+        </Td>
+        <Td>
           <Sort
             sortKey={'AUTHOR'}
             onSort={onSort}
@@ -278,8 +320,8 @@ const Table = ({
           >
             Author
           </Sort>
-        </span>
-        <span style={{ width: '13%' }}>
+        </Td>
+        <Td>
           <Sort
             sortKey={'COMMENTS'}
             onSort={onSort}
@@ -287,8 +329,8 @@ const Table = ({
           >
             Comments
           </Sort>
-        </span>
-        <span style={{ width: '10%' }}>
+        </Td>
+        <Td>
           <Sort
             sortKey={'POINTS'}
             onSort={onSort}
@@ -296,27 +338,29 @@ const Table = ({
           >
             Points
           </Sort>
-        </span>
-        <span style={{ width: '10%' }}>
-          
-                  </span>
+        </Td>
+        <Td>
+          Remove
+                  </Td>
+                  </Tr>
       
-      </div>
+      </Thead>
+      <Tbody>
       {reverseSortedList.map(item =>
-        <div key={item.objectID} className="table-row">
-          <span style={{ width: '30%' }}>
+        <div key={item.objectID}>
+          <Td>
             <a href={item.url}>{item.title}</a>
-          </span>
-          <span style={{ width: '25%' }}>
+          </Td>
+          <Td>
             {item.author}
-          </span>
-          <span style={{ width: '13%' }}>
+          </Td>
+          <Td>
             {item.num_comments}
-          </span>
-          <span style={{ width: '10%' }}>
+          </Td>
+          <Td>
             {item.points}
-          </span>
-          <span style={{ width: '10%' }}>
+          </Td>
+          <Td>
             <Button
             style={{ fontSize: '1.5vw'}}
               onClick={() => onDismiss(item.objectID)}
@@ -324,10 +368,11 @@ const Table = ({
             >
               Dismiss
             </Button>
-          </span>
+          </Td>
         </div>
       )}
-    </div>
+      </Tbody>
+    </Table>
   );
 }
 
@@ -376,7 +421,7 @@ const ButtonWithLoading = withLoading(Button);
 
 export {
   Search,
-  Table,
+  TableSorted,
 };
 
 export default App;
